@@ -1836,9 +1836,7 @@ class InputDecorator extends StatefulWidget {
   /// Whether the input field has focus.
   ///
   /// Determines the position of the label text and the color and weight of the
-  /// border, as well as the container fill color, which is a blend of
-  /// [InputDecoration.focusColor] with [InputDecoration.fillColor] when
-  /// focused, and [InputDecoration.fillColor] when not.
+  /// border.
   ///
   /// Defaults to false.
   ///
@@ -1857,11 +1855,6 @@ class InputDecorator extends StatefulWidget {
   ///
   /// Defaults to false.
   ///
-  /// See also:
-  ///
-  ///  * [InputDecoration.focusColor], which is also blended into the hover
-  ///    color and fill color when [isFocused] is true to produce the final
-  ///    color.
   final bool isHovering;
 
   /// If true, the height of the input field will be as large as possible.
@@ -2547,7 +2540,6 @@ class InputDecoration {
     this.counterStyle,
     this.filled,
     this.fillColor,
-    this.focusColor,
     this.hoverColor,
     this.errorBorder,
     this.focusedBorder,
@@ -2578,7 +2570,6 @@ class InputDecoration {
     this.hintStyle,
     this.filled = false,
     this.fillColor,
-    this.focusColor,
     this.hoverColor,
     this.border = InputBorder.none,
     this.enabled = true,
@@ -3080,8 +3071,7 @@ class InputDecoration {
 
   /// If true the decoration's container is filled with [fillColor].
   ///
-  /// When [InputDecorator.isFocused] is true, the [focusColor] is also blended into the final
-  /// fill color.  When [InputDecorator.isHovering] is true, the [hoverColor] is also blended
+  /// When [InputDecorator.isHovering] is true, the [hoverColor] is also blended
   /// into the final fill color.
   ///
   /// Typically this field set to true if [border] is an
@@ -3097,8 +3087,7 @@ class InputDecoration {
 
   /// The base fill color of the decoration's container color.
   ///
-  /// When [InputDecorator.isFocused] is true, the [focusColor] is also blended
-  /// into the final fill color.  When [InputDecorator.isHovering] is true, the
+  /// When [InputDecorator.isHovering] is true, the
   /// [hoverColor] is also blended into the final fill color.
   ///
   /// By default the fillColor is based on the current [Theme].
@@ -3107,29 +3096,13 @@ class InputDecoration {
   /// and bordered per the [border]. It's the area adjacent to [icon] and above
   /// the widgets that contain [helperText], [errorText], and [counterText].
   ///
-  /// This color is blended with [focusColor] if the decoration is focused.
   final Color fillColor;
-
-  /// The color to blend with [fillColor] and fill the decoration's container
-  /// with, if [filled] is true and the container has input focus.
-  ///
-  /// When [InputDecorator.isHovering] is true, the [hoverColor] is also blended into the final
-  /// fill color.
-  ///
-  /// By default the [focusColor] is based on the current [Theme].
-  ///
-  /// The decoration's container is the area which is filled if [filled] is
-  /// true and bordered per the [border]. It's the area adjacent to
-  /// [icon] and above the widgets that contain [helperText],
-  /// [errorText], and [counterText].
-  final Color focusColor;
 
   /// The color of the focus highlight for the decoration shown if the container
   /// is being hovered over by a mouse.
   ///
   /// If [filled] is true, the color is blended with [fillColor] and fills the
-  /// decoration's container. When [InputDecorator.isFocused] is true, the
-  /// [focusColor] is also blended into the final fill color.
+  /// decoration's container.
   ///
   /// If [filled] is false, and [InputDecorator.isFocused] is false, the color
   /// is blended over the [enabledBorder]'s color.
@@ -3351,7 +3324,6 @@ class InputDecoration {
     TextStyle counterStyle,
     bool filled,
     Color fillColor,
-    Color focusColor,
     Color hoverColor,
     InputBorder errorBorder,
     InputBorder focusedBorder,
@@ -3396,7 +3368,6 @@ class InputDecoration {
       counterStyle: counterStyle ?? this.counterStyle,
       filled: filled ?? this.filled,
       fillColor: fillColor ?? this.fillColor,
-      focusColor: focusColor ?? this.focusColor,
       hoverColor: hoverColor ?? this.hoverColor,
       errorBorder: errorBorder ?? this.errorBorder,
       focusedBorder: focusedBorder ?? this.focusedBorder,
@@ -3433,7 +3404,6 @@ class InputDecoration {
       counterStyle: counterStyle ?? theme.counterStyle,
       filled: filled ?? theme.filled,
       fillColor: fillColor ?? theme.fillColor,
-      focusColor: focusColor ?? theme.focusColor,
       hoverColor: hoverColor ?? theme.hoverColor,
       errorBorder: errorBorder ?? theme.errorBorder,
       focusedBorder: focusedBorder ?? theme.focusedBorder,
@@ -3484,7 +3454,6 @@ class InputDecoration {
         && other.counterStyle == counterStyle
         && other.filled == filled
         && other.fillColor == fillColor
-        && other.focusColor == focusColor
         && other.hoverColor == hoverColor
         && other.errorBorder == errorBorder
         && other.focusedBorder == focusedBorder
@@ -3519,7 +3488,6 @@ class InputDecoration {
       isCollapsed,
       filled,
       fillColor,
-      focusColor,
       hoverColor,
       border,
       enabled,
@@ -3581,7 +3549,6 @@ class InputDecoration {
       if (counterStyle != null) 'counterStyle: $counterStyle',
       if (filled == true) 'filled: true', // filled == null same as filled == false
       if (fillColor != null) 'fillColor: $fillColor',
-      if (focusColor != null) 'focusColor: $focusColor',
       if (hoverColor != null) 'hoverColor: $hoverColor',
       if (errorBorder != null) 'errorBorder: $errorBorder',
       if (focusedBorder != null) 'focusedBorder: $focusedBorder',
@@ -3634,7 +3601,6 @@ class InputDecorationTheme with Diagnosticable {
     this.counterStyle,
     this.filled = false,
     this.fillColor,
-    this.focusColor,
     this.hoverColor,
     this.errorBorder,
     this.focusedBorder,
@@ -3784,16 +3750,6 @@ class InputDecorationTheme with Diagnosticable {
   /// [InputBorder.getOuterPath], which is filled if [filled] is
   /// true and bordered per the [border].
   final Color fillColor;
-
-  /// The color to blend with the decoration's [fillColor] with, if [filled] is
-  /// true and the container has the input focus.
-  ///
-  /// By default the [focusColor] is based on the current [Theme].
-  ///
-  /// The decoration's container is the area, defined by the border's
-  /// [InputBorder.getOuterPath], which is filled if [filled] is
-  /// true and bordered per the [border].
-  final Color focusColor;
 
   /// The color to blend with the decoration's [fillColor] with, if the
   /// decoration is being hovered over by a mouse pointer.
@@ -3983,7 +3939,6 @@ class InputDecorationTheme with Diagnosticable {
     TextStyle counterStyle,
     bool filled,
     Color fillColor,
-    Color focusColor,
     Color hoverColor,
     InputBorder errorBorder,
     InputBorder focusedBorder,
@@ -4010,7 +3965,6 @@ class InputDecorationTheme with Diagnosticable {
       counterStyle: counterStyle ?? this.counterStyle,
       filled: filled ?? this.filled,
       fillColor: fillColor ?? this.fillColor,
-      focusColor: focusColor ?? this.focusColor,
       hoverColor: hoverColor ?? this.hoverColor,
       errorBorder: errorBorder ?? this.errorBorder,
       focusedBorder: focusedBorder ?? this.focusedBorder,
@@ -4041,7 +3995,6 @@ class InputDecorationTheme with Diagnosticable {
       counterStyle,
       filled,
       fillColor,
-      focusColor,
       hoverColor,
       errorBorder,
       focusedBorder,
@@ -4075,7 +4028,6 @@ class InputDecorationTheme with Diagnosticable {
         && other.floatingLabelBehavior == floatingLabelBehavior
         && other.filled == filled
         && other.fillColor == fillColor
-        && other.focusColor == focusColor
         && other.hoverColor == hoverColor
         && other.errorBorder == errorBorder
         && other.focusedBorder == focusedBorder
@@ -4107,7 +4059,6 @@ class InputDecorationTheme with Diagnosticable {
     properties.add(DiagnosticsProperty<TextStyle>('counterStyle', counterStyle, defaultValue: defaultTheme.counterStyle));
     properties.add(DiagnosticsProperty<bool>('filled', filled, defaultValue: defaultTheme.filled));
     properties.add(ColorProperty('fillColor', fillColor, defaultValue: defaultTheme.fillColor));
-    properties.add(ColorProperty('focusColor', focusColor, defaultValue: defaultTheme.focusColor));
     properties.add(ColorProperty('hoverColor', hoverColor, defaultValue: defaultTheme.hoverColor));
     properties.add(DiagnosticsProperty<InputBorder>('errorBorder', errorBorder, defaultValue: defaultTheme.errorBorder));
     properties.add(DiagnosticsProperty<InputBorder>('focusedBorder', focusedBorder, defaultValue: defaultTheme.focusedErrorBorder));
